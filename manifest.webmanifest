@@ -1,0 +1,20 @@
+{
+  "name": "Atelier Tools",
+  "short_name": "Atelier",
+  "description": "Calculatoare tehnice pentru atelier.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07111f",
+  "theme_color": "#111827",
+  "lang": "ro",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

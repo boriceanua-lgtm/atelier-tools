@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="Aplicație PWA pentru calcule tehnice în atelier.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>Atelier Tools</title>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">PWA pentru atelier</p>
+        <h1>Atelier Tools</h1>
+        <p class="subtitle">Primul modul: calculator pentru rotatorul de sudură.</p>
+      </div>
+      <button id="installButton" class="install-button" hidden>Instalează</button>
+    </header>
+
+    <nav class="module-tabs" aria-label="Module">
+      <button class="module-tab active" data-module="rotator">Rotator</button>
+      <button class="module-tab" data-module="coming-soon">Alte module</button>
+    </nav>
+
+    <section id="rotatorModule">
+      <div class="mode-switch" role="tablist" aria-label="Mod calcul">
+        <button id="modeFromFrequency" class="mode-button active">Din frecvență</button>
+        <button id="modeFromSpeed" class="mode-button">Din viteză</button>
+      </div>
+
+      <section class="card input-card">
+        <div class="form-grid">
+          <label>
+            <span>Diametrul piesei</span>
+            <div class="input-with-unit">
+              <input id="diameter" type="number" inputmode="decimal" min="0.1" step="0.1" value="200">
+              <span>mm</span>
+            </div>
+          </label>
+
+          <label id="frequencyField">
+            <span>Frecvența convertizorului</span>
+            <div class="input-with-unit">
+              <input id="frequency" type="number" inputmode="decimal" min="0" step="0.1" value="9">
+              <span>Hz</span>
+            </div>
+          </label>
+
+          <label id="targetSpeedField" hidden>
+            <span>Viteza periferică dorită</span>
+            <div class="input-with-unit">
+              <input id="targetSpeed" type="number" inputmode="decimal" min="0" step="1" value="300">
+              <span>mm/min</span>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <section class="card result-card">
+        <p id="mainResultLabel" class="result-label">Viteza periferică</p>
+        <p id="mainResult" class="main-result">—</p>
+
+        <div class="result-grid">
+          <div>
+            <span>Turație arbore</span>
+            <strong id="outputRpm">—</strong>
+          </div>
+          <div>
+            <span>Timp pentru o rotație</span>
+            <strong id="secondsPerTurn">—</strong>
+          </div>
+          <div>
+            <span>Raport total</span>
+            <strong id="totalRatio">—</strong>
+          </div>
+        </div>
+
+        <div id="warningBox" class="warning-box" hidden></div>
+      </section>
+
+      <details class="card settings-card">
+        <summary>Setările transmisiei</summary>
+
+        <div class="form-grid settings-grid">
+          <label>
+            <span>Turație motor la frecvența nominală</span>
+            <div class="input-with-unit">
+              <input id="motorRpm" type="number" inputmode="decimal" min="1" step="1" value="1320">
+              <span>rpm</span>
+            </div>
+          </label>
+
+          <label>
+            <span>Frecvență nominală motor</span>
+            <div class="input-with-unit">
+              <input id="nominalFrequency" type="number" inputmode="decimal" min="1" step="1" value="50">
+              <span>Hz</span>
+            </div>
+          </label>
+
+          <label>
+            <span>Raport reductor 1</span>
+            <input id="ratioOne" type="number" inputmode="decimal" min="1" step="0.01" value="20">
+          </label>
+
+          <label>
+            <span>Raport reductor 2</span>
+            <input id="ratioTwo" type="number" inputmode="decimal" min="1" step="0.01" value="25">
+          </label>
+        </div>
+
+        <div class="settings-actions">
+          <button id="resetSettings" class="secondary-button">Revino la valorile inițiale</button>
+        </div>
+      </details>
+    </section>
+
+    <section id="comingSoonModule" class="card coming-soon" hidden>
+      <h2>Module pregătite pentru extindere</h2>
+      <p>Frezare, strunjire, găurire, greutăți profile, îndoire tablă și conversii.</p>
+    </section>
+
+    <footer>
+      <span id="offlineStatus">Pregătită pentru funcționare offline.</span>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
