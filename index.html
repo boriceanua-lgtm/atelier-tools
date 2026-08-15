@@ -114,6 +114,38 @@ progress::-moz-progress-bar{background:#f59e0b}
 .key-workshop-value small{color:#fcd34d}
 .key-workshop-value strong{color:#fff}
 
+
+/* v0.3.8 — palette refinement */
+:root{
+  --bg:#0b0c0e;
+  --panel:#1b1d20;
+  --panel2:#222428;
+  --line:#44484d;
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --accent:#f59e0b;
+  --accent2:#d97706;
+}
+body{
+  background:
+    radial-gradient(circle at 100% 0%, rgba(245,158,11,.045), transparent 26rem),
+    linear-gradient(180deg,#0b0c0e 0%,#101214 100%);
+}
+.hero,.card,.panel,.module,.result,.resultbox,.thread-card,.machine-card{
+  background:linear-gradient(180deg,#202226 0%,#1a1c1f 100%) !important;
+  border-color:#44484d !important;
+}
+.module,.machine-card{
+  box-shadow:0 0 0 1px rgba(255,255,255,.018) inset;
+}
+button:not(.primary),.btn:not(.primary),.option:not(.selected){
+  border-color:#44484d !important;
+}
+.key-workshop-value{
+  border-color:rgba(245,158,11,.58) !important;
+  background:linear-gradient(135deg,rgba(245,158,11,.13),rgba(217,119,6,.035)),#1b1d20 !important;
+}
+
 </style>
 </head>
 <body>
@@ -125,7 +157,7 @@ progress::-moz-progress-bar{background:#f59e0b}
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.7</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.8</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
