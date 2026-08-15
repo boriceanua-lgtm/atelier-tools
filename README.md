@@ -1,10 +1,6 @@
-# Atelier Tools v0.3
+# Atelier Tools v0.3.2
 
-- Dashboard modular
-- Poziționator cu unități multiple
-- Kemppi Master M355: flux Weld Assist funcțional
-- Selecții: grosime, tip îmbinare, poziție
-- Rezultat cu viteză periferică estimată și frecvență poziționator
-- Trimitere directă în modul Poziționator
-
-Notă: viteza periferică este o estimare Atelier Tools pentru pornire și trebuie validată prin probă. Nu este o valoare furnizată de Kemppi.
+Hotfix robust:
+- CSS și JavaScript sunt incluse direct în `index.html`
+- elimină problema de cache în care HTML-ul nou se combina cu `app.js` / `style.css` vechi
+- wizard Kemppi funcțional: grosime → îmbinare → poziție → rezultat

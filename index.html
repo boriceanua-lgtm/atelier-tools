@@ -1,178 +1,209 @@
 <!doctype html>
 <html lang="ro">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css">
-  <title>Atelier Tools</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.webmanifest?v=032">
+<title>Atelier Tools</title>
+<style>
+:root{--bg:#06101d;--surface:#111827;--surface2:#182235;--border:#2a3a52;--text:#f8fafc;--muted:#94a3b8;--primary:#38bdf8;--success:#22c55e;--warning:#f59e0b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top right,rgba(56,189,248,.16),transparent 32%),linear-gradient(160deg,#040a12,var(--bg));color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:800px;margin:auto;padding:16px 14px 36px}
+header{display:flex;gap:12px;align-items:center;margin-bottom:16px}
+header>div{flex:1}header small,.hero>b{color:var(--primary);font-weight:900;letter-spacing:.05em}
+h1{margin:0;font-size:1.6rem}button,input,select{font:inherit}button{cursor:pointer}
+.hero,.card{background:rgba(17,24,39,.96);border:1px solid var(--border);border-radius:18px;padding:16px;margin-bottom:12px}
+.hero h2{font-size:1.55rem;margin:8px 0}.hero p,.muted,.footnote{color:var(--muted);line-height:1.45}
+.modules{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modules button{min-height:125px;text-align:left;padding:15px;border-radius:17px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+.modules i,.modules strong,.modules span{display:block}.modules i{font-size:1.5rem;color:var(--primary);margin-bottom:10px}.modules span{color:var(--muted);margin-top:6px}
+.switch,.wizard-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.switch button,.primary,.secondary,#back,#install{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface);color:var(--text);font-weight:800}
+.switch .active,.primary{background:var(--primary);color:#082f49;border-color:transparent}
+.grid{display:grid;gap:12px}@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+label{display:block;color:var(--muted)}input,select{min-height:48px;border:1px solid var(--border);background:var(--surface2);color:var(--text);padding:10px;border-radius:12px}
+.compound{display:grid;grid-template-columns:1fr auto;margin-top:7px}.compound input{border-radius:12px 0 0 12px;border-right:0}.compound select,.compound.fixed span{border-radius:0 12px 12px 0}
+.compound.fixed span{display:grid;place-items:center;min-width:72px;border:1px solid var(--border);background:var(--surface2);color:var(--muted)}
+.result{border-color:rgba(34,197,94,.4);background:linear-gradient(135deg,rgba(34,197,94,.14),rgba(56,189,248,.08)),var(--surface)}
+.resulttop{display:flex;justify-content:space-between;gap:12px}.resulttop #mainResult{font-size:2.3rem;font-weight:900;margin-top:4px}
+.metrics,.selection-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.metrics>div,.selection-summary>div,.recommendation{background:#091321;border-radius:12px;padding:11px}
+.metrics span,.selection-summary span,.recommendation small{display:block;color:var(--muted);font-size:.8rem}.metrics b,.selection-summary b,.recommendation strong{display:block;margin-top:5px}
+.ratio{display:flex;justify-content:space-between;background:var(--surface2);padding:12px;border-radius:12px;margin:14px 0}
+.wizard-progress{margin-bottom:12px}.wizard-progress>div{height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:7px}.wizard-progress i{display:block;height:100%;width:25%;background:var(--primary);transition:.2s}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0}.choice-grid.compact{grid-template-columns:repeat(3,1fr)}
+.choice-grid button{min-height:64px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);color:var(--text);font-weight:750}.choice-grid button.selected{background:var(--primary);color:#082f49;border-color:transparent}
+.subcard{background:rgba(5,12,22,.42);border-radius:14px;padding:13px;margin:12px 0}.subcard h4{margin:0 0 10px}.recommendation{margin-top:12px}.recommendation strong{font-size:1.6rem;margin-bottom:10px}
+.footnote{font-size:.78rem}#warning{background:rgba(245,158,11,.12);color:#fde68a;border:1px solid rgba(245,158,11,.4);padding:10px;border-radius:10px}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
+</style>
 </head>
 <body>
 <main class="app">
-  <header>
-    <button id="back" hidden>←</button>
-    <div>
-      <small>ASISTENT DIGITAL</small>
-      <h1 id="title">Atelier Tools</h1>
-    </div>
-    <button id="install" hidden>Instalează</button>
-  </header>
+<header>
+  <button id="back" hidden>←</button>
+  <div><small>ASISTENT DIGITAL</small><h1 id="title">Atelier Tools</h1></div>
+  <button id="install" hidden>Instalează</button>
+</header>
 
-  <section id="dashboard">
-    <div class="hero">
-      <b>Versiunea 0.3</b>
-      <h2>Instrumentele atelierului, într-un singur loc.</h2>
-      <p>Poziționator + primul flux funcțional pentru Kemppi Master M355.</p>
-    </div>
+<section id="dashboard">
+  <div class="hero"><b>Versiunea 0.3.2</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <h3>Module</h3>
+  <div class="modules">
+    <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
+    <button data-open="kemppi"><i>⚡</i><strong>Kemppi Master M355</strong><span>Weld Assist + recomandare poziționator</span></button>
+    <button disabled><i>⚙</i><strong>Frezare</strong><span>În dezvoltare</span></button>
+    <button disabled><i>⇄</i><strong>Conversii</strong><span>În dezvoltare</span></button>
+  </div>
+</section>
 
-    <h3>Module</h3>
-    <div class="modules">
-      <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
-      <button data-open="kemppi"><i>⚡</i><strong>Kemppi Master M355</strong><span>Weld Assist + recomandare poziționator</span></button>
-      <button disabled><i>⚙</i><strong>Frezare</strong><span>În dezvoltare</span></button>
-      <button disabled><i>⇄</i><strong>Conversii</strong><span>În dezvoltare</span></button>
-    </div>
+<section id="rotator" hidden>
+  <div class="switch"><button id="fromHz" class="active">Din frecvență</button><button id="fromSpeed">Din viteză</button></div>
+  <div class="card grid">
+    <label>Diametrul piesei<div class="compound"><input id="diameter" type="number" value="200" step="0.1"><select id="diameterUnit"><option value="mm">mm</option><option value="cm">cm</option><option value="in">inch</option></select></div></label>
+    <label id="hzField">Frecvența convertizorului<div class="compound fixed"><input id="frequency" type="number" value="9" step="0.1"><span>Hz</span></div></label>
+    <label id="speedField" hidden>Viteza dorită<div class="compound"><input id="targetSpeed" type="number" value="300" step="0.1"><select id="inputSpeedUnit"><option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option></select></div></label>
+  </div>
+  <div class="card result">
+    <div class="resulttop"><div><small id="resultLabel">Viteza periferică</small><div id="mainResult">—</div></div>
+    <select id="outputSpeedUnit"><option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option></select></div>
+    <div class="metrics"><div><span>Turație motor</span><b id="motorActual">—</b></div><div><span>Turație arbore</span><b id="outputRpm">—</b></div><div><span>Viteză unghiulară</span><b id="angular">—</b></div><div><span>90°</span><b id="t90">—</b></div><div><span>180°</span><b id="t180">—</b></div><div><span>360°</span><b id="t360">—</b></div></div>
+    <p id="warning" hidden></p>
+  </div>
+  <details class="card"><summary>Setările transmisiei</summary><div class="grid"><label>Turație motor<input id="motorRpm" type="number" value="1320"></label><label>Frecvență nominală<input id="nominalHz" type="number" value="50"></label><label>Raport reductor 1<input id="ratio1" type="number" value="20"></label><label>Raport reductor 2<input id="ratio2" type="number" value="25"></label></div><div class="ratio">Raport total <b id="ratioTotal">500 : 1</b></div><button id="reset" class="secondary">Valori inițiale</button></details>
+</section>
+
+<section id="kemppi" hidden>
+  <div class="hero"><b>WELD ASSIST</b><h2>Kemppi Master M355</h2><p>Flux bazat pe selecțiile Weld Assist: grosime, tip de îmbinare și poziție.</p></div>
+  <div class="wizard-progress"><span id="weldStepLabel">Pasul 1 din 4</span><div><i id="weldProgress"></i></div></div>
+
+  <section id="wStep1" class="card">
+    <h3>1. Grosimea materialului</h3><p class="muted">Domeniu Weld Assist: 1–10 mm. Pentru PG, maxim 3 mm.</p>
+    <label>Grosime<div class="compound fixed"><input id="wThickness" type="number" min="1" max="10" step="0.5" value="3"><span>mm</span></div></label>
+    <button id="goStep2" class="primary">Continuă</button>
   </section>
 
-  <section id="rotator" hidden>
-    <div class="switch">
-      <button id="fromHz" class="active">Din frecvență</button>
-      <button id="fromSpeed">Din viteză</button>
+  <section id="wStep2" class="card" hidden>
+    <h3>2. Tipul îmbinării</h3>
+    <div class="choice-grid" id="jointChoices">
+      <button data-value="butt">Cap la cap</button><button data-value="corner">Colț exterior</button><button data-value="edge">Muchie</button><button data-value="lap">Suprapunere</button><button data-value="t">Îmbinare T</button><button data-value="tube">Țeavă</button><button data-value="tubeplate">Țeavă + placă</button>
     </div>
-    <div class="card grid">
-      <label>Diametrul piesei
-        <div class="compound">
-          <input id="diameter" type="number" value="200" step="0.1">
-          <select id="diameterUnit"><option value="mm">mm</option><option value="cm">cm</option><option value="in">inch</option></select>
-        </div>
-      </label>
-      <label id="hzField">Frecvența convertizorului
-        <div class="compound fixed"><input id="frequency" type="number" value="9" step="0.1"><span>Hz</span></div>
-      </label>
-      <label id="speedField" hidden>Viteza dorită
-        <div class="compound">
-          <input id="targetSpeed" type="number" value="300" step="0.1">
-          <select id="inputSpeedUnit">
-            <option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option>
-          </select>
-        </div>
-      </label>
-    </div>
-
-    <div class="card result">
-      <div class="resulttop">
-        <div><small id="resultLabel">Viteza periferică</small><div id="mainResult">—</div></div>
-        <select id="outputSpeedUnit">
-          <option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option>
-        </select>
-      </div>
-      <div class="metrics">
-        <div><span>Turație motor</span><b id="motorActual">—</b></div>
-        <div><span>Turație arbore</span><b id="outputRpm">—</b></div>
-        <div><span>Viteză unghiulară</span><b id="angular">—</b></div>
-        <div><span>90°</span><b id="t90">—</b></div>
-        <div><span>180°</span><b id="t180">—</b></div>
-        <div><span>360°</span><b id="t360">—</b></div>
-      </div>
-      <p id="warning" hidden></p>
-    </div>
-
-    <details class="card">
-      <summary>Setările transmisiei</summary>
-      <div class="grid">
-        <label>Turație motor<input id="motorRpm" type="number" value="1320"></label>
-        <label>Frecvență nominală<input id="nominalHz" type="number" value="50"></label>
-        <label>Raport reductor 1<input id="ratio1" type="number" value="20"></label>
-        <label>Raport reductor 2<input id="ratio2" type="number" value="25"></label>
-      </div>
-      <div class="ratio">Raport total <b id="ratioTotal">500 : 1</b></div>
-      <button id="reset" class="secondary">Valori inițiale</button>
-    </details>
+    <div class="wizard-nav"><button id="back1" class="secondary">Înapoi</button><button id="goStep3" class="primary">Continuă</button></div>
   </section>
 
-  <section id="kemppi" hidden>
-    <div class="hero">
-      <b>WELD ASSIST</b>
-      <h2>Kemppi Master M355</h2>
-      <p>Flux bazat pe selecțiile Weld Assist: grosime, tip de îmbinare și poziție.</p>
+  <section id="wStep3" class="card" hidden>
+    <h3>3. Poziția de sudare</h3>
+    <div class="choice-grid compact" id="positionChoices">
+      <button data-value="PA">PA</button><button data-value="PB">PB</button><button data-value="PC">PC</button><button data-value="PD">PD</button><button data-value="PE">PE</button><button data-value="PF">PF</button><button data-value="PG">PG</button>
     </div>
-
-    <div id="weldWizard" class="wizard">
-      <div class="wizard-progress">
-        <span id="weldStepLabel">Pasul 1 din 4</span>
-        <div><i id="weldProgress"></i></div>
-      </div>
-
-      <section id="wStep1" class="card weld-step">
-        <h3>1. Grosimea materialului</h3>
-        <p class="muted">Domeniu Weld Assist: 1–10 mm. Pentru PG, maxim 3 mm.</p>
-        <label>Grosime
-          <div class="compound fixed"><input id="wThickness" type="number" min="1" max="10" step="0.5" value="3"><span>mm</span></div>
-        </label>
-        <button class="primary weld-next" data-next="2">Continuă</button>
-      </section>
-
-      <section id="wStep2" class="card weld-step" hidden>
-        <h3>2. Tipul îmbinării</h3>
-        <div class="choice-grid" id="jointChoices">
-          <button data-value="butt">Cap la cap</button>
-          <button data-value="corner">Colț exterior</button>
-          <button data-value="edge">Muchie</button>
-          <button data-value="lap">Suprapunere</button>
-          <button data-value="t">Îmbinare T</button>
-          <button data-value="tube">Țeavă</button>
-          <button data-value="tubeplate">Țeavă + placă</button>
-        </div>
-        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="1">Înapoi</button><button class="primary weld-next" data-next="3">Continuă</button></div>
-      </section>
-
-      <section id="wStep3" class="card weld-step" hidden>
-        <h3>3. Poziția de sudare</h3>
-        <div class="choice-grid compact" id="positionChoices">
-          <button data-value="PA">PA</button><button data-value="PB">PB</button><button data-value="PC">PC</button><button data-value="PD">PD</button><button data-value="PE">PE</button><button data-value="PF">PF</button><button data-value="PG">PG</button>
-        </div>
-        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="2">Înapoi</button><button class="primary weld-next" data-next="4">Vezi rezultatul</button></div>
-      </section>
-
-      <section id="wStep4" class="card weld-step result" hidden>
-        <h3>4. Rezultat</h3>
-        <div class="selection-summary">
-          <div><span>Grosime</span><b id="sumThickness">—</b></div>
-          <div><span>Îmbinare</span><b id="sumJoint">—</b></div>
-          <div><span>Poziție</span><b id="sumPosition">—</b></div>
-        </div>
-
-        <div class="subcard">
-          <h4>Parametrii recomandați de Kemppi</h4>
-          <p class="muted">Weld Assist recomandă viteza sârmei, curentul și tensiunea. Introdu valorile afișate de aparat pentru a le salva cu presetul.</p>
-          <div class="grid">
-            <label>Viteză sârmă<div class="compound fixed"><input id="kWire" type="number" step="0.1" placeholder="ex. 6.2"><span>m/min</span></div></label>
-            <label>Curent<div class="compound fixed"><input id="kCurrent" type="number" step="1" placeholder="ex. 145"><span>A</span></div></label>
-            <label>Tensiune<div class="compound fixed"><input id="kVoltage" type="number" step="0.1" placeholder="ex. 20.5"><span>V</span></div></label>
-          </div>
-        </div>
-
-        <div class="subcard">
-          <h4>Recomandare poziționator</h4>
-          <label>Diametrul piesei
-            <div class="compound fixed"><input id="kDiameter" type="number" min="1" step="1" value="200"><span>mm</span></div>
-          </label>
-          <div class="recommendation">
-            <small>Viteză periferică de pornire*</small><strong id="kTravelSpeed">—</strong>
-            <small>Frecvență poziționator</small><strong id="kFrequency">—</strong>
-          </div>
-          <p class="footnote">*Estimare Atelier Tools pentru reglaj inițial, nu valoare Kemppi. Se validează prin probă și se poate calibra ulterior din preseturile tale.</p>
-          <button id="sendToRotator" class="primary">Trimite în Poziționator</button>
-        </div>
-
-        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="3">Înapoi</button><button id="weldRestart" class="secondary">Preset nou</button></div>
-      </section>
-    </div>
+    <div class="wizard-nav"><button id="back2" class="secondary">Înapoi</button><button id="goStep4" class="primary">Vezi rezultatul</button></div>
   </section>
 
-  <footer id="status">Pregătită pentru funcționare offline.</footer>
+  <section id="wStep4" class="card result" hidden>
+    <h3>4. Rezultat</h3>
+    <div class="selection-summary"><div><span>Grosime</span><b id="sumThickness">—</b></div><div><span>Îmbinare</span><b id="sumJoint">—</b></div><div><span>Poziție</span><b id="sumPosition">—</b></div></div>
+    <div class="subcard"><h4>Recomandare poziționator</h4>
+      <label>Diametrul piesei<div class="compound fixed"><input id="kDiameter" type="number" min="1" step="1" value="200"><span>mm</span></div></label>
+      <div class="recommendation"><small>Viteză periferică de pornire*</small><strong id="kTravelSpeed">—</strong><small>Frecvență poziționator</small><strong id="kFrequency">—</strong></div>
+      <p class="footnote">*Estimare Atelier Tools pentru reglaj inițial, nu valoare Kemppi.</p>
+      <button id="sendToRotator" class="primary">Trimite în Poziționator</button>
+    </div>
+    <div class="wizard-nav"><button id="back3" class="secondary">Înapoi</button><button id="restartWeld" class="secondary">Preset nou</button></div>
+  </section>
+</section>
+
+<footer id="status">Pregătită pentru funcționare offline.</footer>
 </main>
-<script src="app.js"></script>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const ids=['dashboard','rotator','kemppi','back','title','fromHz','fromSpeed','hzField','speedField','diameter','diameterUnit','frequency','targetSpeed','inputSpeedUnit','outputSpeedUnit','motorRpm','nominalHz','ratio1','ratio2','ratioTotal','resultLabel','mainResult','motorActual','outputRpm','angular','t90','t180','t360','warning','reset'];
+const E={};ids.forEach(id=>E[id]=$(id));
+let mode='hz';
+
+function show(id){
+  ['dashboard','rotator','kemppi'].forEach(x=>E[x].hidden=x!==id);
+  E.back.hidden=id==='dashboard';
+  E.title.textContent=id==='dashboard'?'Atelier Tools':id==='rotator'?'Poziționator':'Kemppi Master M355';
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.open)));
+E.back.addEventListener('click',()=>show('dashboard'));
+
+const F={mm_min:1,mm_s:60,cm_min:10,m_min:1000,in_min:25.4,in_s:1524};
+const L={mm_min:'mm/min',mm_s:'mm/s',cm_min:'cm/min',m_min:'m/min',in_min:'in/min',in_s:'in/s'};
+const num=e=>Number(e.value)||0;
+const fmt=(v,d=1)=>new Intl.NumberFormat('ro-RO',{maximumFractionDigits:d}).format(v);
+const diam=(v,u)=>u==='cm'?v*10:u==='in'?v*25.4:v;
+
+function ui(){
+  const hz=mode==='hz';
+  E.hzField.hidden=!hz;E.speedField.hidden=hz;E.outputSpeedUnit.hidden=!hz;
+  E.fromHz.classList.toggle('active',hz);E.fromSpeed.classList.toggle('active',!hz);
+}
+function calc(){
+  const dm=diam(num(E.diameter),E.diameterUnit.value),mr=num(E.motorRpm),nh=num(E.nominalHz),r=num(E.ratio1)*num(E.ratio2);
+  E.ratioTotal.textContent=fmt(r,2)+' : 1'; if(dm<=0||mr<=0||nh<=0||r<=0)return;
+  let f,or,vm;
+  if(mode==='hz'){f=num(E.frequency);or=(mr*f/nh)/r;vm=Math.PI*dm*or;const u=E.outputSpeedUnit.value;E.resultLabel.textContent='Viteza periferică';E.mainResult.textContent=fmt(vm/F[u],u==='m_min'||u==='in_s'?3:1)+' '+L[u]}
+  else{vm=num(E.targetSpeed)*F[E.inputSpeedUnit.value];or=vm/(Math.PI*dm);f=or*r*nh/mr;E.resultLabel.textContent='Frecvența recomandată';E.mainResult.textContent=fmt(f,2)+' Hz'}
+  const ma=mr*f/nh,deg=or*6,t=or>0?60/or:0;E.motorActual.textContent=fmt(ma,0)+' rpm';E.outputRpm.textContent=fmt(or,3)+' rpm';E.angular.textContent=fmt(deg,2)+' °/s';E.t90.textContent=t?fmt(t/4,1)+' s':'—';E.t180.textContent=t?fmt(t/2,1)+' s':'—';E.t360.textContent=t?fmt(t,1)+' s':'—';
+}
+E.fromHz.addEventListener('click',()=>{mode='hz';ui();calc()});
+E.fromSpeed.addEventListener('click',()=>{mode='speed';ui();calc()});
+['diameter','diameterUnit','frequency','targetSpeed','inputSpeedUnit','outputSpeedUnit','motorRpm','nominalHz','ratio1','ratio2'].forEach(id=>{E[id].addEventListener('input',calc);E[id].addEventListener('change',calc)});
+E.reset.addEventListener('click',()=>{E.diameter.value=200;E.diameterUnit.value='mm';E.frequency.value=9;E.targetSpeed.value=300;E.inputSpeedUnit.value='mm_min';E.outputSpeedUnit.value='mm_min';E.motorRpm.value=1320;E.nominalHz.value=50;E.ratio1.value=20;E.ratio2.value=25;mode='hz';ui();calc()});
+
+let joint='',position='';
+const jointNames={butt:'Cap la cap',corner:'Colț exterior',edge:'Muchie',lap:'Suprapunere',t:'Îmbinare T',tube:'Țeavă',tubeplate:'Țeavă + placă'};
+function weldStep(step){
+  [1,2,3,4].forEach(i=>$('wStep'+i).hidden=i!==step);
+  $('weldStepLabel').textContent='Pasul '+step+' din 4';
+  $('weldProgress').style.width=(step*25)+'%';
+  if(step===4) updateWeldResult();
+  window.scrollTo(0,0);
+}
+$('goStep2').addEventListener('click',()=>{
+  const t=num($('wThickness'));
+  if(t<1||t>10){alert('Grosimea trebuie să fie între 1 și 10 mm.');return}
+  weldStep(2);
+});
+document.querySelectorAll('#jointChoices button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#jointChoices button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');joint=b.dataset.value;
+}));
+$('goStep3').addEventListener('click',()=>{if(!joint){alert('Selectează tipul îmbinării.');return}weldStep(3)});
+document.querySelectorAll('#positionChoices button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#positionChoices button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');position=b.dataset.value;
+}));
+$('goStep4').addEventListener('click',()=>{
+  const t=num($('wThickness'));
+  if(!position){alert('Selectează poziția de sudare.');return}
+  if(position==='PG'&&t>3){alert('Pentru poziția PG, maximum 3 mm.');return}
+  weldStep(4);
+});
+$('back1').addEventListener('click',()=>weldStep(1));$('back2').addEventListener('click',()=>weldStep(2));$('back3').addEventListener('click',()=>weldStep(3));
+$('restartWeld').addEventListener('click',()=>weldStep(1));
+
+function recommendedTravelSpeed(t,j,p){
+  let base=t<=1.5?450:t<=3?380:t<=5?320:t<=7?270:230;
+  const jf={butt:1.05,corner:.95,edge:1,lap:.95,t:.88,tube:.90,tubeplate:.85}[j]||1;
+  const pf={PA:1,PB:.95,PC:.82,PD:.75,PE:.72,PF:.72,PG:.78}[p]||1;
+  return Math.round(base*jf*pf/5)*5;
+}
+function updateWeldResult(){
+  const t=num($('wThickness')),speed=recommendedTravelSpeed(t,joint,position),d=num($('kDiameter'));
+  $('sumThickness').textContent=fmt(t,1)+' mm';$('sumJoint').textContent=jointNames[joint]||'—';$('sumPosition').textContent=position||'—';
+  const r=num(E.ratio1)*num(E.ratio2),out=d>0?speed/(Math.PI*d):0,hz=num(E.motorRpm)>0?out*r*num(E.nominalHz)/num(E.motorRpm):0;
+  $('kTravelSpeed').textContent=fmt(speed,0)+' mm/min';$('kFrequency').textContent=fmt(hz,2)+' Hz';
+}
+$('kDiameter').addEventListener('input',updateWeldResult);
+$('sendToRotator').addEventListener('click',()=>{
+  const speed=recommendedTravelSpeed(num($('wThickness')),joint,position);
+  E.diameter.value=num($('kDiameter'));E.diameterUnit.value='mm';E.targetSpeed.value=speed;E.inputSpeedUnit.value='mm_min';mode='speed';ui();calc();show('rotator');
+});
+ui();calc();weldStep(1);
+})();
+</script>
 </body>
 </html>
