@@ -53,7 +53,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.4</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.5</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
@@ -181,6 +181,40 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
         <select id="threadPitch"></select>
       </label>
     </div>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <label>Material
+        <select id="threadMaterial">
+          <option value="s235">Oțel moale / S235–S275</option>
+          <option value="s355">Oțel structural S355</option>
+          <option value="stainless">Inox 304 / 316</option>
+          <option value="aluminium">Aluminiu</option>
+          <option value="brass">Alamă / bronz ușor așchiabil</option>
+          <option value="castiron">Fontă cenușie</option>
+        </select>
+      </label>
+      <label>Tip tarod
+        <select id="tapType">
+          <option value="hss">HSS / HSS-E, tarod de așchiere</option>
+          <option value="form">Tarod de deformare</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="card result">
+    <h3>Setări recomandate pentru mașina de filetat</h3>
+    <div class="metrics">
+      <div><span>Turație recomandată</span><b id="tapRpm">—</b></div>
+      <div><span>Viteză de așchiere</span><b id="tapVc">—</b></div>
+      <div><span>Cuplu estimat de lucru</span><b id="tapTorque">—</b></div>
+      <div><span>Limită inițială protecție</span><b id="tapTorqueLimit">—</b></div>
+      <div><span>Capacitate GS 1100-16 E</span><b id="machineRange">M3–M16</b></div>
+      <div><span>Maxim mașină</span><b>312 rpm</b></div>
+    </div>
+    <p id="machineWarning" class="footnote"></p>
   </div>
 
   <div class="switch">
@@ -338,9 +372,34 @@ function updatePitchOptions(){
   });
   updateThreadCalc();
 }
+const threadMaterialData={
+  s235:{name:'Oțel moale / S235–S275',vc:8,torque:1.00},
+  s355:{name:'Oțel structural S355',vc:6,torque:1.15},
+  stainless:{name:'Inox 304 / 316',vc:4,torque:1.45},
+  aluminium:{name:'Aluminiu',vc:15,torque:0.42},
+  brass:{name:'Alamă / bronz',vc:12,torque:0.50},
+  castiron:{name:'Fontă cenușie',vc:8,torque:0.72}
+};
 function updateThreadCalc(){
   const d=Number($('threadSize').value),p=Number($('threadPitch').value);
   if(!d||!p)return;
+  const mat=threadMaterialData[$('threadMaterial').value];
+  const tapType=$('tapType').value;
+  let vc=mat.vc*(tapType==='form'?0.75:1);
+  let rpm=Math.round((1000*vc)/(Math.PI*d));
+  rpm=Math.min(312,Math.max(20,rpm));
+  const typeFactor=tapType==='form'?1.35:1;
+  const torque=0.035*d*d*p*mat.torque*typeFactor;
+  const limit=torque*1.25;
+  $('tapRpm').textContent=`${rpm} rpm`;
+  $('tapVc').textContent=`${fmt(vc,1)} m/min`;
+  $('tapTorque').textContent=`≈ ${fmt(torque,1)} Nm`;
+  $('tapTorqueLimit').textContent=`≈ ${fmt(limit,1)} Nm`;
+  let mw='';
+  if(d>16) mw='GS 1100-16 E este specificată de producător pentru M3–M16 la 400 N/mm². Pentru dimensiunea selectată nu folosi recomandarea pe această mașină.';
+  else if(limit>18) mw='Cuplul estimat este ridicat pentru această mașină. Folosește o turație redusă, ungere adecvată și verifică limita de cuplu / ambreiajul înainte de lucru.';
+  else mw='Valorile sunt puncte de pornire conservatoare. Reglează în funcție de tarod, lubrifiant, gaură străpunsă/oarbă și materialul real.';
+  $('machineWarning').textContent=mw;
   const des=`M${d} × ${String(p).replace('.',',')}`;
   const drill=d-p;
   const blank=d-0.1*p;
@@ -367,6 +426,8 @@ function setThreadMode(m){
 }
 $('threadSize').addEventListener('change',updatePitchOptions);
 $('threadPitch').addEventListener('change',updateThreadCalc);
+$('threadMaterial').addEventListener('change',updateThreadCalc);
+$('tapType').addEventListener('change',updateThreadCalc);
 $('threadInternal').addEventListener('click',()=>setThreadMode('internal'));
 $('threadExternal').addEventListener('click',()=>setThreadMode('external'));
 updatePitchOptions();
