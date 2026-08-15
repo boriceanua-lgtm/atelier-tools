@@ -1,8 +1,6 @@
-# Atelier Tools v0.3.8
+# Atelier Tools v0.3.9
 
-Finisare a paletei industriale:
-- cardul introductiv este acum grafit neutru, fără tentă bleumarin
-- cardurile modulelor folosesc aceeași familie de grafit
-- contururile sunt gri-oțel
-- portocaliul/amber rămâne rezervat pentru selecții, acțiuni și valori importante
-- funcționalitatea v0.3.7 este păstrată
+- selectorul „Dimensiune filet” este mărit și evidențiat
+- valoarea selectată (M3, M4, M5 etc.) este afișată mult mai mare
+- selectorul de pas rămâne neschimbat
+- restul funcționalității v0.3.8 este păstrat

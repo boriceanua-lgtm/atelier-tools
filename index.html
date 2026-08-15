@@ -146,6 +146,21 @@ button:not(.primary),.btn:not(.primary),.option:not(.selected){
   background:linear-gradient(135deg,rgba(245,158,11,.13),rgba(217,119,6,.035)),#1b1d20 !important;
 }
 
+
+/* v0.3.9 — thread size is a primary workshop input */
+#threadSize{
+  font-size:2rem !important;
+  font-weight:900 !important;
+  min-height:74px !important;
+  padding:12px 48px 12px 18px !important;
+  color:#fff !important;
+}
+.thread-size-emphasis label,
+label[for="threadSize"]{
+  font-weight:800 !important;
+  color:#f4f4f5 !important;
+}
+
 </style>
 </head>
 <body>
@@ -157,7 +172,7 @@ button:not(.primary),.btn:not(.primary),.option:not(.selected){
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.8</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.9</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
@@ -269,7 +284,7 @@ button:not(.primary),.btn:not(.primary),.option:not(.selected){
 
   <div class="card">
     <div class="grid">
-      <label>Dimensiune filet
+      <label class="thread-size-label">Dimensiune filet
         <select id="threadSize">
           <option value="3">M3</option><option value="4">M4</option><option value="5">M5</option>
           <option value="6">M6</option><option value="8">M8</option><option value="10">M10</option>
