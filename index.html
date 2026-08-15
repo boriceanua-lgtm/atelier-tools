@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
 <link rel="manifest" href="manifest.webmanifest?v=032">
-<title>Atelier Tools</title>
+<title>Cuerto Rico</title>
 <style>
 :root{--bg:#06101d;--surface:#202327;--surface2:#182235;--border:#2a3a52;--text:#f8fafc;--muted:#94a3b8;--primary:#f59e0b;--success:#f59e0b;--warning:#f59e0b}
 *{box-sizing:border-box}
@@ -216,12 +216,12 @@ label[for="threadSize"]{
 <main class="app">
 <header>
   <button id="back" hidden>←</button>
-  <div><small>ASISTENT DIGITAL</small><h1 id="title">Atelier Tools</h1></div>
+  <div><small>ASISTENT DIGITAL</small><h1 id="title">Cuerto Rico</h1></div>
   <button id="install" hidden>Instalează</button>
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.10</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.11</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
@@ -316,7 +316,7 @@ label[for="threadSize"]{
     <div class="subcard"><h4>Recomandare poziționator</h4>
       <label>Diametrul piesei<div class="compound fixed"><input id="kDiameter" type="number" min="1" step="1" value="200"><span>mm</span></div></label>
       <div class="recommendation"><small>Viteză periferică de pornire*</small><strong id="kTravelSpeed">—</strong><small>Frecvență poziționator</small><strong id="kFrequency">—</strong></div>
-      <p class="footnote">*Estimare Atelier Tools pentru reglaj inițial, nu valoare Kemppi.</p>
+      <p class="footnote">*Estimare Cuerto Rico pentru reglaj inițial, nu valoare Kemppi.</p>
       <button id="sendToRotator" class="primary">Trimite în Poziționator</button>
     </div>
     <div class="wizard-nav"><button id="back3" class="secondary">Înapoi</button><button id="restartWeld" class="secondary">Preset nou</button></div>
@@ -443,7 +443,7 @@ let mode='hz';
 function show(id){
   ['dashboard','rotator','kemppi','threads'].forEach(x=>$(x).hidden=x!==id);
   E.back.hidden=id==='dashboard';
-  E.title.textContent=id==='dashboard'?'Atelier Tools':id==='rotator'?'Poziționator':id==='kemppi'?'Kemppi Master M355':'Filete metrice';
+  E.title.textContent=id==='dashboard'?'Cuerto Rico':id==='rotator'?'Poziționator':id==='kemppi'?'Kemppi Master M355':'Filete metrice';
   window.scrollTo(0,0);
 }
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.open)));

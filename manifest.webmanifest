@@ -1,7 +1,7 @@
 {
-  "name": "Atelier Tools",
-  "short_name": "Atelier",
-  "start_url": "./?v=0310",
+  "name": "Cuerto Rico",
+  "short_name": "Cuerto Rico",
+  "start_url": "./?v=0311",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0b0c0e",
