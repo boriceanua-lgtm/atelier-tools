@@ -1,7 +1,10 @@
-# Atelier Tools v0.2
+# Atelier Tools v0.3
 
-Noutăți: dashboard, conversii de unități, rpm motor și arbore, grade/s, timpi 90°/180°/360° și ecran Kemppi Master M355.
+- Dashboard modular
+- Poziționator cu unități multiple
+- Kemppi Master M355: flux Weld Assist funcțional
+- Selecții: grosime, tip îmbinare, poziție
+- Rezultat cu viteză periferică estimată și frecvență poziționator
+- Trimitere directă în modul Poziționator
 
-Încarcă toate fișierele în rădăcina repository-ului și confirmă înlocuirea celor existente. GitHub Pages va publica automat versiunea nouă.
-
-Deployment refresh v0.2
+Notă: viteza periferică este o estimare Atelier Tools pentru pornire și trebuie validată prin probă. Nu este o valoare furnizată de Kemppi.

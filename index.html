@@ -1,1 +1,178 @@
-<!doctype html><html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0f172a"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css"><title>Atelier Tools</title></head><body><main class="app"><header><button id="back" hidden>←</button><div><small>ASISTENT DIGITAL</small><h1 id="title">Atelier Tools</h1></div><button id="install" hidden>Instalează</button></header><section id="dashboard"><div class="hero"><b>Versiunea 0.2</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Începem cu poziționatorul și baza pentru Kemppi Master M355.</p></div><h3>Module</h3><div class="modules"><button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button><button data-open="kemppi"><i>⚡</i><strong>Kemppi Master M355</strong><span>Weld Assist + recomandări</span></button><button disabled><i>⚙</i><strong>Frezare</strong><span>În dezvoltare</span></button><button disabled><i>⇄</i><strong>Conversii</strong><span>În dezvoltare</span></button></div></section><section id="rotator" hidden><div class="switch"><button id="fromHz" class="active">Din frecvență</button><button id="fromSpeed">Din viteză</button></div><div class="card grid"><label>Diametrul piesei<div class="compound"><input id="diameter" type="number" value="200" step="0.1"><select id="diameterUnit"><option value="mm">mm</option><option value="cm">cm</option><option value="in">inch</option></select></div></label><label id="hzField">Frecvența convertizorului<div class="compound fixed"><input id="frequency" type="number" value="9" step="0.1"><span>Hz</span></div></label><label id="speedField" hidden>Viteza dorită<div class="compound"><input id="targetSpeed" type="number" value="300" step="0.1"><select id="inputSpeedUnit"><option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option></select></div></label></div><div class="card result"><div class="resulttop"><div><small id="resultLabel">Viteza periferică</small><div id="mainResult">—</div></div><select id="outputSpeedUnit"><option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option></select></div><div class="metrics"><div><span>Turație motor</span><b id="motorActual">—</b></div><div><span>Turație arbore</span><b id="outputRpm">—</b></div><div><span>Viteză unghiulară</span><b id="angular">—</b></div><div><span>90°</span><b id="t90">—</b></div><div><span>180°</span><b id="t180">—</b></div><div><span>360°</span><b id="t360">—</b></div></div><p id="warning" hidden></p></div><details class="card"><summary>Setările transmisiei</summary><div class="grid"><label>Turație motor<input id="motorRpm" type="number" value="1320"></label><label>Frecvență nominală<input id="nominalHz" type="number" value="50"></label><label>Raport reductor 1<input id="ratio1" type="number" value="20"></label><label>Raport reductor 2<input id="ratio2" type="number" value="25"></label></div><div class="ratio">Raport total <b id="ratioTotal">500 : 1</b></div><button id="reset" class="secondary">Valori inițiale</button></details></section><section id="kemppi" hidden><div class="hero"><b>MODUL ÎN PREGĂTIRE</b><h2>Kemppi Master M355</h2><p>Vom reproduce pașii Weld Assist și vom adăuga recomandarea vitezei poziționatorului.</p></div><div class="steps"><div><b>1</b><span>Proces</span></div><div><b>2</b><span>Material</span></div><div><b>3</b><span>Îmbinare</span></div><div><b>4</b><span>Poziție</span></div><div><b>5</b><span>Grosime</span></div><div><b>6</b><span>Rezultat</span></div></div></section><footer id="status">Pregătită pentru funcționare offline.</footer></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <title>Atelier Tools</title>
+</head>
+<body>
+<main class="app">
+  <header>
+    <button id="back" hidden>←</button>
+    <div>
+      <small>ASISTENT DIGITAL</small>
+      <h1 id="title">Atelier Tools</h1>
+    </div>
+    <button id="install" hidden>Instalează</button>
+  </header>
+
+  <section id="dashboard">
+    <div class="hero">
+      <b>Versiunea 0.3</b>
+      <h2>Instrumentele atelierului, într-un singur loc.</h2>
+      <p>Poziționator + primul flux funcțional pentru Kemppi Master M355.</p>
+    </div>
+
+    <h3>Module</h3>
+    <div class="modules">
+      <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
+      <button data-open="kemppi"><i>⚡</i><strong>Kemppi Master M355</strong><span>Weld Assist + recomandare poziționator</span></button>
+      <button disabled><i>⚙</i><strong>Frezare</strong><span>În dezvoltare</span></button>
+      <button disabled><i>⇄</i><strong>Conversii</strong><span>În dezvoltare</span></button>
+    </div>
+  </section>
+
+  <section id="rotator" hidden>
+    <div class="switch">
+      <button id="fromHz" class="active">Din frecvență</button>
+      <button id="fromSpeed">Din viteză</button>
+    </div>
+    <div class="card grid">
+      <label>Diametrul piesei
+        <div class="compound">
+          <input id="diameter" type="number" value="200" step="0.1">
+          <select id="diameterUnit"><option value="mm">mm</option><option value="cm">cm</option><option value="in">inch</option></select>
+        </div>
+      </label>
+      <label id="hzField">Frecvența convertizorului
+        <div class="compound fixed"><input id="frequency" type="number" value="9" step="0.1"><span>Hz</span></div>
+      </label>
+      <label id="speedField" hidden>Viteza dorită
+        <div class="compound">
+          <input id="targetSpeed" type="number" value="300" step="0.1">
+          <select id="inputSpeedUnit">
+            <option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option>
+          </select>
+        </div>
+      </label>
+    </div>
+
+    <div class="card result">
+      <div class="resulttop">
+        <div><small id="resultLabel">Viteza periferică</small><div id="mainResult">—</div></div>
+        <select id="outputSpeedUnit">
+          <option value="mm_min">mm/min</option><option value="mm_s">mm/s</option><option value="cm_min">cm/min</option><option value="m_min">m/min</option><option value="in_min">in/min</option><option value="in_s">in/s</option>
+        </select>
+      </div>
+      <div class="metrics">
+        <div><span>Turație motor</span><b id="motorActual">—</b></div>
+        <div><span>Turație arbore</span><b id="outputRpm">—</b></div>
+        <div><span>Viteză unghiulară</span><b id="angular">—</b></div>
+        <div><span>90°</span><b id="t90">—</b></div>
+        <div><span>180°</span><b id="t180">—</b></div>
+        <div><span>360°</span><b id="t360">—</b></div>
+      </div>
+      <p id="warning" hidden></p>
+    </div>
+
+    <details class="card">
+      <summary>Setările transmisiei</summary>
+      <div class="grid">
+        <label>Turație motor<input id="motorRpm" type="number" value="1320"></label>
+        <label>Frecvență nominală<input id="nominalHz" type="number" value="50"></label>
+        <label>Raport reductor 1<input id="ratio1" type="number" value="20"></label>
+        <label>Raport reductor 2<input id="ratio2" type="number" value="25"></label>
+      </div>
+      <div class="ratio">Raport total <b id="ratioTotal">500 : 1</b></div>
+      <button id="reset" class="secondary">Valori inițiale</button>
+    </details>
+  </section>
+
+  <section id="kemppi" hidden>
+    <div class="hero">
+      <b>WELD ASSIST</b>
+      <h2>Kemppi Master M355</h2>
+      <p>Flux bazat pe selecțiile Weld Assist: grosime, tip de îmbinare și poziție.</p>
+    </div>
+
+    <div id="weldWizard" class="wizard">
+      <div class="wizard-progress">
+        <span id="weldStepLabel">Pasul 1 din 4</span>
+        <div><i id="weldProgress"></i></div>
+      </div>
+
+      <section id="wStep1" class="card weld-step">
+        <h3>1. Grosimea materialului</h3>
+        <p class="muted">Domeniu Weld Assist: 1–10 mm. Pentru PG, maxim 3 mm.</p>
+        <label>Grosime
+          <div class="compound fixed"><input id="wThickness" type="number" min="1" max="10" step="0.5" value="3"><span>mm</span></div>
+        </label>
+        <button class="primary weld-next" data-next="2">Continuă</button>
+      </section>
+
+      <section id="wStep2" class="card weld-step" hidden>
+        <h3>2. Tipul îmbinării</h3>
+        <div class="choice-grid" id="jointChoices">
+          <button data-value="butt">Cap la cap</button>
+          <button data-value="corner">Colț exterior</button>
+          <button data-value="edge">Muchie</button>
+          <button data-value="lap">Suprapunere</button>
+          <button data-value="t">Îmbinare T</button>
+          <button data-value="tube">Țeavă</button>
+          <button data-value="tubeplate">Țeavă + placă</button>
+        </div>
+        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="1">Înapoi</button><button class="primary weld-next" data-next="3">Continuă</button></div>
+      </section>
+
+      <section id="wStep3" class="card weld-step" hidden>
+        <h3>3. Poziția de sudare</h3>
+        <div class="choice-grid compact" id="positionChoices">
+          <button data-value="PA">PA</button><button data-value="PB">PB</button><button data-value="PC">PC</button><button data-value="PD">PD</button><button data-value="PE">PE</button><button data-value="PF">PF</button><button data-value="PG">PG</button>
+        </div>
+        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="2">Înapoi</button><button class="primary weld-next" data-next="4">Vezi rezultatul</button></div>
+      </section>
+
+      <section id="wStep4" class="card weld-step result" hidden>
+        <h3>4. Rezultat</h3>
+        <div class="selection-summary">
+          <div><span>Grosime</span><b id="sumThickness">—</b></div>
+          <div><span>Îmbinare</span><b id="sumJoint">—</b></div>
+          <div><span>Poziție</span><b id="sumPosition">—</b></div>
+        </div>
+
+        <div class="subcard">
+          <h4>Parametrii recomandați de Kemppi</h4>
+          <p class="muted">Weld Assist recomandă viteza sârmei, curentul și tensiunea. Introdu valorile afișate de aparat pentru a le salva cu presetul.</p>
+          <div class="grid">
+            <label>Viteză sârmă<div class="compound fixed"><input id="kWire" type="number" step="0.1" placeholder="ex. 6.2"><span>m/min</span></div></label>
+            <label>Curent<div class="compound fixed"><input id="kCurrent" type="number" step="1" placeholder="ex. 145"><span>A</span></div></label>
+            <label>Tensiune<div class="compound fixed"><input id="kVoltage" type="number" step="0.1" placeholder="ex. 20.5"><span>V</span></div></label>
+          </div>
+        </div>
+
+        <div class="subcard">
+          <h4>Recomandare poziționator</h4>
+          <label>Diametrul piesei
+            <div class="compound fixed"><input id="kDiameter" type="number" min="1" step="1" value="200"><span>mm</span></div>
+          </label>
+          <div class="recommendation">
+            <small>Viteză periferică de pornire*</small><strong id="kTravelSpeed">—</strong>
+            <small>Frecvență poziționator</small><strong id="kFrequency">—</strong>
+          </div>
+          <p class="footnote">*Estimare Atelier Tools pentru reglaj inițial, nu valoare Kemppi. Se validează prin probă și se poate calibra ulterior din preseturile tale.</p>
+          <button id="sendToRotator" class="primary">Trimite în Poziționator</button>
+        </div>
+
+        <div class="wizard-nav"><button class="secondary weld-prev" data-prev="3">Înapoi</button><button id="weldRestart" class="secondary">Preset nou</button></div>
+      </section>
+    </div>
+  </section>
+
+  <footer id="status">Pregătită pentru funcționare offline.</footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
