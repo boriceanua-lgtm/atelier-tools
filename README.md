@@ -1,7 +1,10 @@
-# Atelier Tools v0.3.3
+# Atelier Tools v0.3.4
 
 Noutăți:
-- pictograme SVG pentru toate tipurile de îmbinare din Weld Assist
-- pictograme SVG pentru pozițiile PA, PB, PC, PD, PE, PF și PG
-- pictogramele sunt integrate direct în `index.html`, fără fișiere grafice separate
-- selecția activă păstrează evidențierea albastră
+- modul nou „Filete metrice”
+- dimensiuni M3–M48, în spiritul calculatorului mecanic vechi
+- pas grosier + pași fini uzuali
+- filet interior / tarod: diametru orientativ de găurire D − P
+- filet exterior / matriță: semifabricat orientativ D − 0,1×P
+- unghi profil 60°, pas și avans pe rotație
+- modulul funcționează offline

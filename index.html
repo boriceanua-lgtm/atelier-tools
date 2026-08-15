@@ -53,11 +53,12 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.3</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.4</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
     <button data-open="kemppi"><i>⚡</i><strong>Kemppi Master M355</strong><span>Weld Assist + recomandare poziționator</span></button>
+    <button data-open="threads"><i>⌀</i><strong>Filete metrice</strong><span>Tarod, matriță, pas și diametre</span></button>
     <button disabled><i>⚙</i><strong>Frezare</strong><span>În dezvoltare</span></button>
     <button disabled><i>⇄</i><strong>Conversii</strong><span>În dezvoltare</span></button>
   </div>
@@ -154,6 +155,75 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
   </section>
 </section>
 
+
+<section id="threads" hidden>
+  <div class="hero">
+    <b>FILETE ISO METRICE</b>
+    <h2>Calculator filete metrice</h2>
+    <p>Inspirat de calculatorul mecanic vechi: alegi filetul și pasul, iar aplicația îți arată rapid valorile utile pentru tarod și matriță.</p>
+  </div>
+
+  <div class="card">
+    <div class="grid">
+      <label>Dimensiune filet
+        <select id="threadSize">
+          <option value="3">M3</option><option value="4">M4</option><option value="5">M5</option>
+          <option value="6">M6</option><option value="8">M8</option><option value="10">M10</option>
+          <option value="12">M12</option><option value="14">M14</option><option value="16">M16</option>
+          <option value="18">M18</option><option value="20">M20</option><option value="22">M22</option>
+          <option value="24">M24</option><option value="27">M27</option><option value="30">M30</option>
+          <option value="33">M33</option><option value="36">M36</option><option value="39">M39</option>
+          <option value="42">M42</option><option value="45">M45</option><option value="48">M48</option>
+        </select>
+      </label>
+
+      <label>Pas
+        <select id="threadPitch"></select>
+      </label>
+    </div>
+  </div>
+
+  <div class="switch">
+    <button id="threadInternal" class="active">Filet interior / tarod</button>
+    <button id="threadExternal">Filet exterior / matriță</button>
+  </div>
+
+  <section id="threadInternalPanel" class="card result">
+    <div class="resulttop">
+      <div><small>Burghiu recomandat orientativ</small><div id="tapDrillResult">—</div></div>
+    </div>
+    <div class="metrics">
+      <div><span>Filet</span><b id="threadDesignationI">—</b></div>
+      <div><span>Diametru nominal</span><b id="threadNominalI">—</b></div>
+      <div><span>Pas</span><b id="threadPitchI">—</b></div>
+      <div><span>Unghi profil</span><b>60°</b></div>
+      <div><span>Avans / rotație</span><b id="threadLeadI">—</b></div>
+      <div><span>Formula rapidă</span><b>D − P</b></div>
+    </div>
+    <p class="footnote">Pentru filet tăiat cu tarod, D − P este o aproximație practică a diametrului găurii. Pentru diametre exacte în funcție de procentul de filet, material și toleranță, folosește tabelul producătorului tarodului.</p>
+  </section>
+
+  <section id="threadExternalPanel" class="card result" hidden>
+    <div class="resulttop">
+      <div><small>Diametru semifabricat orientativ</small><div id="dieBlankResult">—</div></div>
+    </div>
+    <div class="metrics">
+      <div><span>Filet</span><b id="threadDesignationE">—</b></div>
+      <div><span>Diametru nominal</span><b id="threadNominalE">—</b></div>
+      <div><span>Pas</span><b id="threadPitchE">—</b></div>
+      <div><span>Unghi profil</span><b>60°</b></div>
+      <div><span>Reducere diametru</span><b id="dieReduction">—</b></div>
+      <div><span>Reducere pe rază</span><b id="dieReductionRadius">—</b></div>
+    </div>
+    <p class="footnote">Valoarea pentru semifabricat folosește regula orientativă D − 0,1×P. Pentru lucrări de precizie, verifică toleranța cerută (de exemplu 6g) și recomandarea producătorului matriței.</p>
+  </section>
+
+  <details class="card">
+    <summary>Ce înseamnă valorile</summary>
+    <p class="muted"><b>D</b> = diametrul nominal al filetului; <b>P</b> = pasul. La un filet metric cu un singur început, avansul axial la o rotație este egal cu pasul.</p>
+  </details>
+</section>
+
 <footer id="status">Pregătită pentru funcționare offline.</footer>
 </main>
 
@@ -165,9 +235,9 @@ const E={};ids.forEach(id=>E[id]=$(id));
 let mode='hz';
 
 function show(id){
-  ['dashboard','rotator','kemppi'].forEach(x=>E[x].hidden=x!==id);
+  ['dashboard','rotator','kemppi','threads'].forEach(x=>$(x).hidden=x!==id);
   E.back.hidden=id==='dashboard';
-  E.title.textContent=id==='dashboard'?'Atelier Tools':id==='rotator'?'Poziționator':'Kemppi Master M355';
+  E.title.textContent=id==='dashboard'?'Atelier Tools':id==='rotator'?'Poziționator':id==='kemppi'?'Kemppi Master M355':'Filete metrice';
   window.scrollTo(0,0);
 }
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.open)));
@@ -244,6 +314,63 @@ $('sendToRotator').addEventListener('click',()=>{
   const speed=recommendedTravelSpeed(num($('wThickness')),joint,position);
   E.diameter.value=num($('kDiameter'));E.diameterUnit.value='mm';E.targetSpeed.value=speed;E.inputSpeedUnit.value='mm_min';mode='speed';ui();calc();show('rotator');
 });
+
+// --- Filete metrice ---
+const metricPitches={
+3:[0.5,0.35],4:[0.7,0.5],5:[0.8,0.5],6:[1,0.75,0.5],
+8:[1.25,1,0.75],10:[1.5,1.25,1,0.75],12:[1.75,1.5,1.25,1],
+14:[2,1.5,1.25,1],16:[2,1.5,1],18:[2.5,2,1.5,1],
+20:[2.5,2,1.5,1],22:[2.5,2,1.5,1],24:[3,2,1.5,1],
+27:[3,2,1.5],30:[3.5,3,2,1.5],33:[3.5,3,2,1.5],
+36:[4,3,2,1.5],39:[4,3,2,1.5],42:[4.5,4,3,2,1.5],
+45:[4.5,4,3,2,1.5],48:[5,4,3,2,1.5]
+};
+let threadMode='internal';
+function updatePitchOptions(){
+  const d=Number($('threadSize').value);
+  const sel=$('threadPitch');
+  sel.innerHTML='';
+  metricPitches[d].forEach((p,i)=>{
+    const o=document.createElement('option');
+    o.value=p;
+    o.textContent=(i===0?`${p} mm — grosier`:`${p} mm — fin`);
+    sel.appendChild(o);
+  });
+  updateThreadCalc();
+}
+function updateThreadCalc(){
+  const d=Number($('threadSize').value),p=Number($('threadPitch').value);
+  if(!d||!p)return;
+  const des=`M${d} × ${String(p).replace('.',',')}`;
+  const drill=d-p;
+  const blank=d-0.1*p;
+  const red=d-blank;
+  $('tapDrillResult').textContent=`Ø ${fmt(drill,2)} mm`;
+  $('threadDesignationI').textContent=des;
+  $('threadNominalI').textContent=`Ø ${fmt(d,1)} mm`;
+  $('threadPitchI').textContent=`${fmt(p,2)} mm`;
+  $('threadLeadI').textContent=`${fmt(p,2)} mm`;
+  $('dieBlankResult').textContent=`Ø ${fmt(blank,2)} mm`;
+  $('threadDesignationE').textContent=des;
+  $('threadNominalE').textContent=`Ø ${fmt(d,1)} mm`;
+  $('threadPitchE').textContent=`${fmt(p,2)} mm`;
+  $('dieReduction').textContent=`${fmt(red,3)} mm`;
+  $('dieReductionRadius').textContent=`${fmt(red/2,3)} mm`;
+}
+function setThreadMode(m){
+  threadMode=m;
+  const int=m==='internal';
+  $('threadInternalPanel').hidden=!int;
+  $('threadExternalPanel').hidden=int;
+  $('threadInternal').classList.toggle('active',int);
+  $('threadExternal').classList.toggle('active',!int);
+}
+$('threadSize').addEventListener('change',updatePitchOptions);
+$('threadPitch').addEventListener('change',updateThreadCalc);
+$('threadInternal').addEventListener('click',()=>setThreadMode('internal'));
+$('threadExternal').addEventListener('click',()=>setThreadMode('external'));
+updatePitchOptions();
+
 ui();calc();weldStep(1);
 })();
 </script>
