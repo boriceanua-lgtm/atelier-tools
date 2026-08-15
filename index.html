@@ -7,9 +7,9 @@
 <link rel="manifest" href="manifest.webmanifest?v=032">
 <title>Atelier Tools</title>
 <style>
-:root{--bg:#06101d;--surface:#111827;--surface2:#182235;--border:#2a3a52;--text:#f8fafc;--muted:#94a3b8;--primary:#38bdf8;--success:#22c55e;--warning:#f59e0b}
+:root{--bg:#06101d;--surface:#202327;--surface2:#182235;--border:#2a3a52;--text:#f8fafc;--muted:#94a3b8;--primary:#f59e0b;--success:#f59e0b;--warning:#f59e0b}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top right,rgba(56,189,248,.16),transparent 32%),linear-gradient(160deg,#040a12,var(--bg));color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+body{margin:0;background:radial-gradient(circle at top right,rgba(245,158,11,.16),transparent 32%),linear-gradient(160deg,#040a12,var(--bg));color:var(--text);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
 .app{max-width:800px;margin:auto;padding:16px 14px 36px}
 header{display:flex;gap:12px;align-items:center;margin-bottom:16px}
 header>div{flex:1}header small,.hero>b{color:var(--primary);font-weight:900;letter-spacing:.05em}
@@ -44,16 +44,16 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 
 
 .key-workshop-value{
-  border:1px solid rgba(56,189,248,.55);
-  background:linear-gradient(135deg,rgba(56,189,248,.16),rgba(34,197,94,.08)),#0b1524;
+  border:1px solid rgba(245,158,11,.62);
+  background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(217,119,6,.07)),#171a1d;
   border-radius:16px;
   padding:16px;
   margin:4px 0 16px;
-  box-shadow:0 0 0 1px rgba(56,189,248,.06) inset;
+  box-shadow:0 0 0 1px rgba(245,158,11,.07) inset;
 }
 .key-workshop-value small{
   display:block;
-  color:#bae6fd;
+  color:#fcd34d;
   font-weight:800;
   letter-spacing:.02em;
   margin-bottom:6px;
@@ -72,6 +72,48 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
   font-size:.82rem;
 }
 
+
+/* v0.3.7 — Industrial graphite / steel / amber */
+:root{
+  --bg:#0b0c0e;
+  --panel:#171a1d;
+  --panel2:#202327;
+  --line:#3b4046;
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --accent:#f59e0b;
+  --accent2:#d97706;
+  --good:#f59e0b;
+}
+body{
+  background:
+    radial-gradient(circle at 100% 0%, rgba(245,158,11,.08), transparent 28rem),
+    linear-gradient(180deg,#0b0c0e,#111315);
+  color:var(--text);
+}
+.card,.panel,.module,.result,.resultbox,.thread-card,.machine-card{
+  background:linear-gradient(180deg,#1b1e21,#151719);
+  border-color:#3b4046;
+}
+button,.btn,.option{
+  border-color:#454a50;
+}
+button.primary,.btn.primary,.selected,.active,.option.selected{
+  background:linear-gradient(180deg,#f59e0b,#d97706) !important;
+  color:#17100a !important;
+  border-color:#fbbf24 !important;
+  box-shadow:0 0 0 1px rgba(251,191,36,.16) inset;
+}
+progress::-webkit-progress-value{background:#f59e0b}
+progress::-moz-progress-bar{background:#f59e0b}
+.key-workshop-value{
+  border-color:rgba(245,158,11,.62);
+  background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(217,119,6,.07)),#171a1d;
+  box-shadow:0 0 0 1px rgba(245,158,11,.07) inset;
+}
+.key-workshop-value small{color:#fcd34d}
+.key-workshop-value strong{color:#fff}
+
 </style>
 </head>
 <body>
@@ -83,7 +125,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.6</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.7</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
@@ -125,34 +167,34 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
     <div class="choice-grid" id="jointChoices">
 <button data-value="butt"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M8 14H46V50H8M92 14H54V50H92" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
-<path d="M46 32H54" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M46 32H54" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Cap la cap</span></button>
 <button data-value="corner"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M22 50V14H58M58 14V50H94" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
-<path d="M58 14L49 23" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M58 14L49 23" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Colț exterior</span></button>
 <button data-value="edge"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M18 14H44V50H18M56 14H82V50H56" fill="none" stroke="currentColor" stroke-width="5"/>
-<path d="M44 14Q50 5 56 14" fill="none" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M44 14Q50 5 56 14" fill="none" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Muchie</span></button>
 <button data-value="lap"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M10 22H70V42H10M30 10H90V30H30" fill="none" stroke="currentColor" stroke-width="5"/>
-<path d="M68 30L76 38" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M68 30L76 38" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Suprapunere</span></button>
 <button data-value="t"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M10 48H90M50 48V10" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-<path d="M50 48L39 37" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M50 48L39 37" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Îmbinare T</span></button>
 <button data-value="tube"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <ellipse cx="50" cy="32" rx="32" ry="20" fill="none" stroke="currentColor" stroke-width="5"/>
 <path d="M20 32H80" stroke="currentColor" stroke-width="5"/>
-<path d="M48 12L54 20" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M48 12L54 20" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Țeavă</span></button>
 <button data-value="tubeplate"><svg class="weld-icon" viewBox="0 0 100 64" aria-hidden="true">
 <path d="M10 50H90" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
 <ellipse cx="50" cy="28" rx="20" ry="14" fill="none" stroke="currentColor" stroke-width="5"/>
 <path d="M50 42V50" stroke="currentColor" stroke-width="5"/>
-<path d="M50 43L41 50" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+<path d="M50 43L41 50" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/>
 </svg><span>Țeavă + placă</span></button>
     </div>
     <div class="wizard-nav"><button id="back1" class="secondary">Înapoi</button><button id="goStep3" class="primary">Continuă</button></div>
@@ -161,13 +203,13 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
   <section id="wStep3" class="card" hidden>
     <h3>3. Poziția de sudare</h3>
     <div class="choice-grid compact" id="positionChoices">
-<button data-value="PA"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M12 46H88" stroke="currentColor" stroke-width="6"/><path d="M50 46V18" stroke="currentColor" stroke-width="6"/><path d="M50 46L39 35" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><path d="M50 8V18" stroke="currentColor" stroke-width="4"/></svg><span class="position-code">PA</span></button>
-<button data-value="PB"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M14 48H86" stroke="currentColor" stroke-width="6"/><path d="M48 48V16" stroke="currentColor" stroke-width="6"/><path d="M48 48L59 37" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><path d="M72 16L60 28" stroke="currentColor" stroke-width="4"/></svg><span class="position-code">PB</span></button>
-<button data-value="PC"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M26 10V54M74 10V54" stroke="currentColor" stroke-width="6"/><path d="M26 32H74" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PC</span></button>
-<button data-value="PD"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M14 16H86" stroke="currentColor" stroke-width="6"/><path d="M50 16V48" stroke="currentColor" stroke-width="6"/><path d="M50 16L61 27" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PD</span></button>
-<button data-value="PE"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M18 16H82" stroke="currentColor" stroke-width="6"/><path d="M18 48H82" stroke="currentColor" stroke-width="6"/><path d="M50 16V48" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PE</span></button>
-<button data-value="PF"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M30 10V54M70 10V54" stroke="currentColor" stroke-width="6"/><path d="M50 50V16" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><path d="M42 24L50 16L58 24" fill="none" stroke="#22c55e" stroke-width="5"/></svg><span class="position-code">PF</span></button>
-<button data-value="PG"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M30 10V54M70 10V54" stroke="currentColor" stroke-width="6"/><path d="M50 14V48" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/><path d="M42 40L50 48L58 40" fill="none" stroke="#22c55e" stroke-width="5"/></svg><span class="position-code">PG</span></button>
+<button data-value="PA"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M12 46H88" stroke="currentColor" stroke-width="6"/><path d="M50 46V18" stroke="currentColor" stroke-width="6"/><path d="M50 46L39 35" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/><path d="M50 8V18" stroke="currentColor" stroke-width="4"/></svg><span class="position-code">PA</span></button>
+<button data-value="PB"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M14 48H86" stroke="currentColor" stroke-width="6"/><path d="M48 48V16" stroke="currentColor" stroke-width="6"/><path d="M48 48L59 37" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/><path d="M72 16L60 28" stroke="currentColor" stroke-width="4"/></svg><span class="position-code">PB</span></button>
+<button data-value="PC"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M26 10V54M74 10V54" stroke="currentColor" stroke-width="6"/><path d="M26 32H74" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PC</span></button>
+<button data-value="PD"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M14 16H86" stroke="currentColor" stroke-width="6"/><path d="M50 16V48" stroke="currentColor" stroke-width="6"/><path d="M50 16L61 27" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PD</span></button>
+<button data-value="PE"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M18 16H82" stroke="currentColor" stroke-width="6"/><path d="M18 48H82" stroke="currentColor" stroke-width="6"/><path d="M50 16V48" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/></svg><span class="position-code">PE</span></button>
+<button data-value="PF"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M30 10V54M70 10V54" stroke="currentColor" stroke-width="6"/><path d="M50 50V16" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/><path d="M42 24L50 16L58 24" fill="none" stroke="#f59e0b" stroke-width="5"/></svg><span class="position-code">PF</span></button>
+<button data-value="PG"><svg class="weld-icon" viewBox="0 0 100 64"><path d="M30 10V54M70 10V54" stroke="currentColor" stroke-width="6"/><path d="M50 14V48" stroke="#f59e0b" stroke-width="6" stroke-linecap="round"/><path d="M42 40L50 48L58 40" fill="none" stroke="#f59e0b" stroke-width="5"/></svg><span class="position-code">PG</span></button>
     </div>
     <div class="wizard-nav"><button id="back2" class="secondary">Înapoi</button><button id="goStep4" class="primary">Vezi rezultatul</button></div>
   </section>
