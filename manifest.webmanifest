@@ -1,7 +1,7 @@
 {
   "name": "Atelier Tools",
   "short_name": "Atelier",
-  "start_url": "./?v=032",
+  "start_url": "./?v=033",
   "scope": "./",
   "display": "standalone",
   "background_color": "#06101d",

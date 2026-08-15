@@ -1,6 +1,7 @@
-# Atelier Tools v0.3.2
+# Atelier Tools v0.3.3
 
-Hotfix robust:
-- CSS și JavaScript sunt incluse direct în `index.html`
-- elimină problema de cache în care HTML-ul nou se combina cu `app.js` / `style.css` vechi
-- wizard Kemppi funcțional: grosime → îmbinare → poziție → rezultat
+Noutăți:
+- pictograme SVG pentru toate tipurile de îmbinare din Weld Assist
+- pictograme SVG pentru pozițiile PA, PB, PC, PD, PE, PF și PG
+- pictogramele sunt integrate direct în `index.html`, fără fișiere grafice separate
+- selecția activă păstrează evidențierea albastră
