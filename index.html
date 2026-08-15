@@ -42,6 +42,36 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 .choice-grid.compact button{min-height:118px}
 .position-code{font-weight:900;font-size:1.05rem}
 
+
+.key-workshop-value{
+  border:1px solid rgba(56,189,248,.55);
+  background:linear-gradient(135deg,rgba(56,189,248,.16),rgba(34,197,94,.08)),#0b1524;
+  border-radius:16px;
+  padding:16px;
+  margin:4px 0 16px;
+  box-shadow:0 0 0 1px rgba(56,189,248,.06) inset;
+}
+.key-workshop-value small{
+  display:block;
+  color:#bae6fd;
+  font-weight:800;
+  letter-spacing:.02em;
+  margin-bottom:6px;
+}
+.key-workshop-value strong{
+  display:block;
+  font-size:2.45rem;
+  line-height:1.05;
+  font-weight:950;
+  color:#fff;
+}
+.key-workshop-value .hint{
+  display:block;
+  margin-top:7px;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
 </style>
 </head>
 <body>
@@ -53,7 +83,7 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
 </header>
 
 <section id="dashboard">
-  <div class="hero"><b>Versiunea 0.3.5</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
+  <div class="hero"><b>Versiunea 0.3.6</b><h2>Instrumentele atelierului, într-un singur loc.</h2><p>Poziționator + Weld Assist funcțional.</p></div>
   <h3>Module</h3>
   <div class="modules">
     <button data-open="rotator"><i>↻</i><strong>Poziționator</strong><span>Hz, rpm, viteză și timpi</span></button>
@@ -223,8 +253,10 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
   </div>
 
   <section id="threadInternalPanel" class="card result">
-    <div class="resulttop">
-      <div><small>Burghiu recomandat orientativ</small><div id="tapDrillResult">—</div></div>
+    <div class="key-workshop-value">
+      <small>BURGHUIU RECOMANDAT</small>
+      <strong id="tapDrillResult">—</strong>
+      <span class="hint">Valoarea principală pentru pregătirea găurii înainte de tarodare</span>
     </div>
     <div class="metrics">
       <div><span>Filet</span><b id="threadDesignationI">—</b></div>
@@ -238,8 +270,10 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;padding-top:14px}
   </section>
 
   <section id="threadExternalPanel" class="card result" hidden>
-    <div class="resulttop">
-      <div><small>Diametru semifabricat orientativ</small><div id="dieBlankResult">—</div></div>
+    <div class="key-workshop-value">
+      <small>DIAMETRU SEMIFABRICAT</small>
+      <strong id="dieBlankResult">—</strong>
+      <span class="hint">Valoarea principală pentru pregătirea barei înainte de filetarea cu matrița</span>
     </div>
     <div class="metrics">
       <div><span>Filet</span><b id="threadDesignationE">—</b></div>
